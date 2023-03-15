@@ -1,12 +1,13 @@
 import Login from "pages/Auth/Login";
 import Register from "pages/Auth/Register";
 import DetailHomestay from "pages/DetailHomestay";
-import { DetailPesanan } from "pages/Order";
-import { KonfirmasiPemesanan } from "pages/Order";
+import { DetailPesanan, KonfirmasiPemesanan } from "pages/Order";
 import Homepage from "pages/Homepage";
 import React from "react";
 import { RouterProvider } from "react-router";
 import { createBrowserRouter } from "react-router-dom";
+import Profile from "pages/Profile";
+import { Hosting, ListHosting, UploadHosting } from "pages/Hosting";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,22 @@ const router = createBrowserRouter([
   {
     path: "/konfirmasiPemesanan",
     element: <KonfirmasiPemesanan />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
+  },
+  {
+    path: "/landingPageListing",
+    element: <Hosting />,
+  },
+  {
+    path: "/listHosting",
+    element: <ListHosting />,
+  },
+  {
+    path: "/uploadHosting",
+    element: <UploadHosting />,
   },
 ]);
 
