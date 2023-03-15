@@ -1,7 +1,8 @@
 import Login from "pages/Auth/Login";
 import Register from "pages/Auth/Register";
 import DetailHomestay from "pages/DetailHomestay";
-import DetailPesanan from "pages/DetailPesanan";
+import { DetailPesanan } from "pages/Order";
+import { KonfirmasiPemesanan } from "pages/Order";
 import Homepage from "pages/Homepage";
 import React from "react";
 import { RouterProvider } from "react-router";
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
   {
     path: "/detailPesanan",
     element: <DetailPesanan />,
+  },
+  {
+    path: "/konfirmasiPemesanan",
+    element: <KonfirmasiPemesanan />,
   },
 ]);
 
