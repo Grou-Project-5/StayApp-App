@@ -1,8 +1,33 @@
 import React from "react";
 
 import imgLogo from "assets/Logo.webp";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "utils/Swal";
+import useCookies from "react-cookie/cjs/useCookies";
+import { handleAuth } from "utils/redux/reducer";
+import Button from "./Button";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const MySwal = withReactContent(Swal);
+
+  const [cookie, , removeCookie] = useCookies(["token"]);
+  const checkToken = cookie.token;
+
+  const handleLogout = async () => {
+    removeCookie("token");
+
+    dispatch(handleAuth(false));
+    navigate("/");
+    MySwal.fire({
+      title: "Log Out Account",
+      text: "You have been Logged out",
+      showCancelButton: false,
+    });
+  };
   return (
     <>
       <div className="navbar bg-white border-2 border-stroke-nav h-[7rem] p-10">
@@ -74,30 +99,49 @@ const Navbar = () => {
         </div>
         <div className="navbar-end">
           <input type="checkbox" className="toggle mr-5 lg:flex hidden" />
-          <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
-                <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+          {checkToken ? (
+            <>
+              <div className="dropdown dropdown-end">
+                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                  <div className="w-10 rounded-full">
+                    <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                  </div>
+                </label>
+                <ul
+                  tabIndex={0}
+                  className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+                >
+                  <li>
+                    <Link to="/profile" className="justify-between">
+                      Profile
+                      <span className="badge">New</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <a>Histori</a>
+                  </li>
+                  <li>
+                    <a
+                      onClick={() =>
+                        checkToken ? handleLogout() : navigate("/")
+                      }
+                    >
+                      Logout
+                    </a>
+                  </li>
+                </ul>
               </div>
-            </label>
-            <ul
-              tabIndex={0}
-              className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <a className="justify-between">
-                  Profile
-                  <span className="badge">New</span>
-                </a>
-              </li>
-              <li>
-                <a>Histori</a>
-              </li>
-              <li>
-                <a>Logout</a>
-              </li>
-            </ul>
-          </div>
+            </>
+          ) : (
+            <div className="flex flex-row">
+              <Button
+                id="btn-login"
+                label="Login"
+                className="btn"
+                onClick={() => navigate("/login")}
+              />
+            </div>
+          )}
         </div>
       </div>
     </>

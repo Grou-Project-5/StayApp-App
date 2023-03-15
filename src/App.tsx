@@ -5,43 +5,59 @@ import { createBrowserRouter } from "react-router-dom";
 import Login from "pages/Auth/Login";
 import Register from "pages/Auth/Register";
 import DetailHomestay from "pages/DetailHomestay";
-import { DetailPesanan } from "pages/Order";
-import { KonfirmasiPemesanan } from "pages/Order";
+import { DetailPesanan, KonfirmasiPemesanan } from "pages/Order";
 import Homepage from "pages/Homepage";
+import React from "react";
+import { RouterProvider } from "react-router";
+import { createBrowserRouter } from "react-router-dom";
+import useCookies from "react-cookie/cjs/useCookies";
+import axios from "axios";
 import Profile from "pages/Profile";
 import EditProfile from "pages/EditProfile";
 import ListHomestay from "pages/ListingHomestay";
 import DaftarUpload from "pages/DaftarUpload";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Homepage />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/register",
-    element: <Register />,
-  },
-  {
-    path: "/detailHomestay",
-    element: <DetailHomestay />,
-  },
-  {
-    path: "/detailPesanan",
-    element: <DetailPesanan />,
-  },
-  {
-    path: "/konfirmasiPemesanan",
-    element: <KonfirmasiPemesanan />,
-  },
-  {
-    path: "/profile",
-    element: <Profile />,
-  },
+
+
+const App = () => {
+  const [cookie, , removeCookie] = useCookies(["token"]);
+  const checkToken = cookie.token;
+
+  axios.interceptors.request.use(function (config) {
+    config.headers = config.headers ?? {};
+    config.headers.Authorization = `Bearer ${cookie.token}`;
+    return config;
+  });
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Homepage />,
+    },
+    {
+      path: "/login",
+      element: <Login />,
+    },
+    {
+      path: "/register",
+      element: <Register />,
+    },
+    {
+      path: "/detailHomestay",
+      element: <DetailHomestay />,
+    },
+    {
+      path: "/detailPesanan",
+      element: checkToken ? <DetailPesanan /> : <Login />,
+    },
+    {
+      path: "/konfirmasiPemesanan",
+      element: checkToken ? <KonfirmasiPemesanan /> : <Login />,
+    },
+    {
+      path: "/profile",
+      element: checkToken ? <Profile /> : <Login />,
+    },
   {
     path: "/editProfile",
     element: <EditProfile />,
@@ -54,9 +70,8 @@ const router = createBrowserRouter([
     path: "/daftarUpload",
     element: <DaftarUpload />,
   },
-]);
-
-const App = () => {
+  ]);
+  
   return <RouterProvider router={router} />;
 };
 

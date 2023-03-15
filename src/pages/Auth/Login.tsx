@@ -3,9 +3,18 @@ import React from "react";
 import imgAuth from "assets/img-auth.webp";
 import imgLogo from "assets/Logo.webp";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
+import axios from "axios";
+
 import Input from "components/Input";
 import Button from "components/Button";
+
+import withReactContent from "sweetalert2-react-content";
+import Swal from "utils/Swal";
+import { useCookies } from "react-cookie";
+import { handleAuth } from "utils/redux/reducer";
 
 const background = {
   backgroundImage: `url(${imgAuth})`,
@@ -16,6 +25,55 @@ const background = {
 };
 
 const Login = () => {
+  const MySwal = withReactContent(Swal);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [, setCookie] = useCookies(["token"]);
+
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [disabled, setDisabled] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (email && password) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [email, password]);
+
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    const body = {
+      email,
+      password,
+    };
+
+    axios
+      .post("http://54.255.147.31/login", body)
+      .then((res) => {
+        const { data, message } = res.data;
+
+        setCookie("token", res.data.token, { path: "/" });
+
+        dispatch(handleAuth(true));
+
+        MySwal.fire({
+          title: "Success Login",
+          text: message,
+          showCancelButton: false,
+        });
+
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => setLoading(false));
+  };
+
   return (
     <>
       <div className="w-full min-h-screen overflow-auto bg-white">
@@ -35,14 +93,15 @@ const Login = () => {
                 <div className="form-control w-full mx-auto">
                   <label className="label mt-3">
                     <span className="label-text text-text-input font-semibold text-lg font-poppins mx-auto w-10/12 lg:w-6/12">
-                      Username
+                      Email
                     </span>
                   </label>
                   <Input
                     id="input-username"
-                    type="text"
+                    type="email"
                     placeholder="marlina1998"
-                    className="input input-bordered w-10/12 lg:w-6/12 bg-bg-input border-slate-300  mx-auto"
+                    className="input input-bordered w-10/12 lg:w-6/12 bg-bg-input border-slate-300  mx-auto text-black font-semibold font-poppins"
+                    onChange={(e: any) => setEmail(e.target.value)}
                   />
                   <label className="label mt-5">
                     <span className="label-text text-text-input font-semibold text-lg font-poppins  mx-auto w-10/12 lg:w-6/12">
@@ -53,14 +112,17 @@ const Login = () => {
                     id="input-password"
                     type="password"
                     placeholder="********"
-                    className="input input-bordered  bg-bg-input border-slate-300  mx-auto w-10/12 lg:w-6/12"
+                    className="input input-bordered  bg-bg-input border-slate-300  mx-auto w-10/12 lg:w-6/12 text-black font-semibold font-poppins"
+                    onChange={(e: any) => setPassword(e.target.value)}
                   />
                 </div>
                 <div className="text-center w-full  mt-10">
                   <Button
                     id="btn-login"
                     label="Login"
-                    className="bg-bg-button w-10/12 lg:w-6/12 rounded-lg py-2 text-white font-poppins font-semibold"
+                    className="bg-bg-button w-10/12 lg:w-6/12 rounded-lg py-2 text-white font-poppins font-semibold disabled:bg-slate-400 disabled:cursor-not-allowed hover:cursor-pointer"
+                    loading={loading || disabled}
+                    onClick={handleLogin}
                   />
                 </div>
               </form>
