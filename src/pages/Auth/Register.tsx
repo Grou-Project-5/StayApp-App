@@ -1,7 +1,7 @@
 import React from "react";
 
 import imgAuth from "assets/img-auth.webp";
-import imgLogo from "../../assets/Logo.webp";
+import imgLogo from "assets/Logo.webp";
 
 import Input from "components/Input";
 import Button from "components/Button";
