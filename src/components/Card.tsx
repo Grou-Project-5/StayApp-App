@@ -29,9 +29,13 @@ const Card: FC<PropsCard> = ({ image, avail, place, price }) => {
             <h1 className="w-[70%] justify-start card-title text-color3 capitalize font-bold font-poppins  text-black ml-5 text-xl">
               {place}
             </h1>
-            <h1 className="w-[30%] justify-end card-title text-color3 capitalize font-bold text-black mr-5 text-xl">
-              Rating
-            </h1>
+            <div className="rating w-[30%] justify-end card-title text-color3 mr-5">
+              <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
+              <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" checked />
+              <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
+              <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
+              <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
+            </div>
           </div>
           <p className="text-slate-500 w-full font-semibold flex justify-start text-xl pl-5">
             Di Dekat Pantai Bagus

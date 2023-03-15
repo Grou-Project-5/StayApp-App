@@ -1,3 +1,7 @@
+import React from "react";
+import { RouterProvider } from "react-router";
+import { createBrowserRouter } from "react-router-dom";
+
 import Login from "pages/Auth/Login";
 import Register from "pages/Auth/Register";
 import DetailHomestay from "pages/DetailHomestay";
@@ -6,10 +10,14 @@ import Homepage from "pages/Homepage";
 import React from "react";
 import { RouterProvider } from "react-router";
 import { createBrowserRouter } from "react-router-dom";
-import Profile from "pages/Profile";
-import { Hosting, ListHosting, UploadHosting } from "pages/Hosting";
 import useCookies from "react-cookie/cjs/useCookies";
 import axios from "axios";
+import Profile from "pages/Profile";
+import EditProfile from "pages/EditProfile";
+import ListHomestay from "pages/ListingHomestay";
+import DaftarUpload from "pages/DaftarUpload";
+
+
 
 const App = () => {
   const [cookie, , removeCookie] = useCookies(["token"]);
@@ -50,19 +58,20 @@ const App = () => {
       path: "/profile",
       element: checkToken ? <Profile /> : <Login />,
     },
-    {
-      path: "/landingPageListing",
-      element: checkToken ? <Hosting /> : <Login />,
-    },
-    {
-      path: "/listHosting",
-      element: checkToken ? <ListHosting /> : <Login />,
-    },
-    {
-      path: "/uploadHosting",
-      element: checkToken ? <UploadHosting /> : <Login />,
-    },
+  {
+    path: "/editProfile",
+    element: <EditProfile />,
+  },
+  {
+    path: "/listHomestay",
+    element: <ListHomestay />,
+  },
+  {
+    path: "/daftarUpload",
+    element: <DaftarUpload />,
+  },
   ]);
+  
   return <RouterProvider router={router} />;
 };
 
