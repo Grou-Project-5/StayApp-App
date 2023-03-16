@@ -16,9 +16,7 @@ const Homepage = () => {
 
   const fetchDataRoom = () => {
     axios
-      .get(
-        "https://virtserver.swaggerhub.com/ADIYUDAPRANATA/Dashboard/1.0.0/users/rooms/"
-      )
+      .get("http://54.255.147.31/rooms")
       .then((res) => {
         const { data } = res.data;
         setDataRoom(data);
@@ -38,11 +36,14 @@ const Homepage = () => {
     <>
       <Layout>
         <Header />
-        {dataRoom?.map((item) => {
-          return (
-            <>
-              <div className="w-full min-h-screen flex justify-center pl-6 mt-10 overflow-hidden">
-                <div className="lg:grid lg:grid-cols-3 grid-cols-1 gap-2 overflow-hidden">
+        <div className="w-full min-h-screen flex justify-center pl-6 mt-10 overflow-hidden">
+          {dataRoom?.map((item) => {
+            return (
+              <>
+                <div
+                  className="lg:grid lg:grid-cols-3 grid-cols-1 gap-2 overflow-hidden"
+                  key={item.id}
+                >
                   <Card
                     image={item.room_picture}
                     place={item.room_name}
@@ -50,11 +51,10 @@ const Homepage = () => {
                     price={item.price}
                   />
                 </div>
-              </div>
-            </>
-          );
-        })}
-
+              </>
+            );
+          })}
+        </div>
         <div className="text-center w-full">
           <Button
             id="btn-loadMore"

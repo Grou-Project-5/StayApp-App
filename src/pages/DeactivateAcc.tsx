@@ -1,8 +1,46 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/Deact.css";
+import { getProfile } from "utils/Datatypes";
+import axios from "axios";
+import { useCookies } from "react-cookie";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "utils/Swal";
 
 const DeactivateAcc = () => {
+  const [deactInput, setDeactInput] = useState<string>("");
+  const [cookie, removeCookie] = useCookies(["token"]);
+  const checkToken = cookie.token;
+  const MySwal = withReactContent(Swal);
+  const navigate = useNavigate();
+
+  const handleDeleteUser = async () => {
+    axios
+      .delete("http://54.255.147.31/users", {
+        headers: {
+          Authorization: `Bearer ${checkToken}`,
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        const { message } = res.data;
+
+        MySwal.fire({
+          title: "User Been Deleted",
+          text: message,
+          showCancelButton: false,
+        });
+        navigate("/login");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    handleDeleteUser();
+  }, []);
+
   return (
     <>
       <div className="w-full bg-white h-screen flex flex-col justify-center mx-auto">
@@ -41,21 +79,43 @@ const DeactivateAcc = () => {
               </p>
               <input
                 type="text"
-                placeholder={`Type "Deactivate"`}
+                placeholder={`Type "DEACTIVATE"`}
                 className="input w-full "
+                onChange={(e: any) => setDeactInput(e.target.value)}
               />
-              <button
-                className="btn btn-wide"
-                style={{
-                  backgroundColor: "#d93333",
-                  border: "none",
-                  color: "white",
-                  borderRadius: "10px",
-                  marginTop: "1rem",
-                }}
-              >
-                Deactivate Account
-              </button>
+              {deactInput === "DEACTIVATE" ? (
+                <>
+                  <button
+                    className="btn btn-wide disabled:cursor-not-allowed disabled:bg-slate-300"
+                    style={{
+                      backgroundColor: "#d93333",
+                      border: "none",
+                      color: "white",
+                      borderRadius: "10px",
+                      marginTop: "1rem",
+                    }}
+                    onClick={() => handleDeleteUser()}
+                  >
+                    Deactivate Account
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    className="btn btn-wide disabled:cursor-not-allowed disabled:bg-slate-300"
+                    style={{
+                      backgroundColor: "grey",
+                      border: "none",
+                      color: "white",
+                      borderRadius: "10px",
+                      marginTop: "1rem",
+                    }}
+                    disabled
+                  >
+                    Deactivate Account
+                  </button>
+                </>
+              )}
             </label>
           </label>
           <Link to="/profile">
