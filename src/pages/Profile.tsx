@@ -82,6 +82,7 @@ const Profile = () => {
               id="btn-edit"
               label="Deactivate Account"
               className="btn btn-active bg-black text-zinc-50 font-poppins mt-10 mb-4 border-none"
+              onClick={() => navigate("/deact")}
             />
           </div>
           <Link
