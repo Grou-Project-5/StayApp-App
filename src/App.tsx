@@ -12,6 +12,7 @@ import Profile from "pages/Profile";
 import EditProfile from "pages/EditProfile";
 import ListHomestay from "pages/ListingHomestay";
 import DaftarUpload from "pages/DaftarUpload";
+import UploadNew from "pages/UploadNewHomestay";
 import DeactivateAcc from "pages/DeactivateAcc";
 
 const App = () => {
@@ -68,6 +69,10 @@ const App = () => {
     {
       path: "/deact",
       element: <DeactivateAcc />,
+    },
+    {
+      path: "/uploadNew",
+      element: <UploadNew />,
     },
   ]);
 
