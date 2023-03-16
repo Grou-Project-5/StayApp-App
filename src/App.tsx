@@ -14,6 +14,7 @@ import ListHomestay from "pages/ListingHomestay";
 import DaftarUpload from "pages/DaftarUpload";
 import UploadNew from "pages/UploadNewHomestay";
 import DeactivateAcc from "pages/DeactivateAcc";
+import EditUpdate from "pages/EditUpdateHomestay";
 
 const App = () => {
   const [cookie, , removeCookie] = useCookies(["token"]);
@@ -73,6 +74,10 @@ const App = () => {
     {
       path: "/uploadNew",
       element: <UploadNew />,
+    },
+    {
+      path: "/editUpdate",
+      element: <EditUpdate />,
     },
   ]);
 
