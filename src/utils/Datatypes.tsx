@@ -25,3 +25,17 @@ export interface EditProfileUser {
   phone?: string;
   pictures?: any;
 }
+
+export interface getFeedback {
+  id?: number;
+  rating?: number;
+  feedback?: string;
+}
+
+export interface getHistory{
+  id?: number;
+  name?: string;
+  tanggal?: number;
+  status?: string;
+  ulasan?:  string;
+}

@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { useCookies } from "react-cookie";
+import axios from "axios";
 
 import Layout from "components/Layout";
 import imgHeader from "assets/img-1 (1).webp";
 import location from "assets/location.webp";
 import Button from "components/Button";
+import { getFeedback } from "utils/Datatypes";
+import { handleAuth } from "utils/redux/reducer";
+import Swal from "utils/Swal";
+import withReactContent from "sweetalert2-react-content";
 
 const background = {
     backgroundImage: `url(${imgHeader})`,
@@ -14,6 +22,57 @@ const background = {
 };
 
 const UlasanRating = () => {
+    const navigate = useNavigate();
+    const MySwal = withReactContent(Swal);
+    const dispatch = useDispatch();
+    const [, setCookie] = useCookies(["token"]);
+    const [cookies, removeCookies] = useCookies(["token"]);
+    const checkToken = cookies.token;
+
+    const [loading, setLoading] = useState<boolean>(false);
+    const [room_id, setRoomId] = useState<number>();
+    const [rating, setRating] = useState<number>();
+    const [comment, setComment] = useState<string>("");
+
+    useEffect(() =>{
+        const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+            e.preventDefault();
+            setLoading(true);
+            const body = {
+              room_id,
+              rating,
+              comment,
+            };
+        
+            axios
+              .post("https://group5.altapro.online/feedbacks", body, {
+                headers: {
+                  Authorization: `Bearer ${checkToken}`,
+                  "Content-Type": "application/json",
+                },
+              })
+              .then((res) => {
+                const { data, message } = res.data;
+        
+                setCookie("token", res.data.token, { path: "/" });
+        
+                dispatch(handleAuth(true));
+        
+                MySwal.fire({
+                  title: "Terimakasih Ulasannya",
+                  text: message,
+                  showCancelButton: false,
+                });
+        
+                navigate("/");
+              })
+              .catch((err) => {
+                console.log(err);
+              })
+              .finally(() => setLoading(false));
+          };
+    })
+
     return(
         <Layout>
             <div className="w-full min-h-screen flex flex-col bg-white items-center mt-10">
@@ -38,7 +97,7 @@ const UlasanRating = () => {
                     <label className="label">
                         <span className="label-text text-black font-poppins font-bold">Berikan Ulasan Tentang Private Beach Villa</span>
                     </label>
-                    <textarea className="w-50 h-60 textarea textarea-bordered bg-white text-xs font-poppins" placeholder="Mempunyai Kolam Renang Pribadi 24 Jam"></textarea>
+                    <textarea className="w-50 h-60 textarea textarea-bordered text-black bg-white text-xs font-poppins" placeholder="Mempunyai Kolam Renang Pribadi 24 Jam"></textarea>
                 </div>
                 <div className="form-control w-96 pl-20 ml-48 mt-7">
                     <label className="label">
