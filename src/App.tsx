@@ -16,6 +16,7 @@ import UploadNew from "pages/UploadNewHomestay";
 import DeactivateAcc from "pages/DeactivateAcc";
 import EditUpdate from "pages/EditUpdateHomestay";
 import UlasanRating from "pages/UlasanRating";
+import History from "pages/HistoryPemesanan";
 
 const App = () => {
   const [cookie, , removeCookie] = useCookies(["token"]);
@@ -83,6 +84,10 @@ const App = () => {
     {
       path: "/ulasanRating",
       element: <UlasanRating />,
+    },
+    {
+      path: "/history",
+      element: <History />,
     },
   ]);
 
