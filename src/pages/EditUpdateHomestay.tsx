@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import Input from "components/Input";
 import Layout from "components/Layout";
 import Button from "components/Button";
-import img1 from "assets/img-1 (1).webp";
+import img1 from "../assets/img-1 (1).webp";
 
-const UploadNew = () =>{
+const EditUpdate = () =>{
     return(
         <Layout>
             <div className="grid-cols-3 flex justify-between items-center">
@@ -20,15 +20,13 @@ const UploadNew = () =>{
                         />
                     </Link>
                 </div>
-                <p className="text-black fle-row font-extrabold font-poppins text-3xl items-center">Upload Homestay</p>
+                <p className="text-black flex font-extrabold font-poppins text-2xl">Upload Data Homestay</p>
                 <div className="text-center w-full">
-                    <Link to="/listHomestay">
                         <Button
-                            id="btn-upload"
-                            label="Lihat Daftar Homestay"
+                            id="btn-update"
+                            label="Update"
                             className="bg-bg-button w-96 lg:w-4/12 mt-10 ml-15 rounded-lg py-4 text-white font-poppins font-semibold hover:bg-red-600 text-xl"
                         />
-                    </Link>
                 </div>
             </div>
             <div className="flex justify-center pl-5 pr-5 mr-5 ml-5 mt-10 overflow-hidden">
@@ -73,6 +71,37 @@ const UploadNew = () =>{
                             <span className="label-text text-black font-poppins font-bold">Ketersediaan</span>
                         </label>
                         <input type="text" placeholder="Avalaible" className="input input-bordered w-full max-w-xs bg-white font-poppins text-xs" />
+                    </div>
+                    <div className="form-control w-96 pl-20 ml-48 mt-7">
+                        <label className="label">
+                            <span className="label-text text-black font-poppins font-bold">Alasan Homestay Tidak Tersedia (*jika memilih tidak tersedia) </span>
+                        </label>
+                        <textarea className="w-50 h-60 textarea textarea-bordered bg-white text-xs font-poppins" placeholder="The villa is located in the middle of the nature and culture of the north of Bali, between the beach and the rice fields, in a quiet bay with dolphins, away from "></textarea>
+                    </div>
+                    <div className="flex-row form-control w-96 pl-20 ml-48 mt-7">
+                            <div className="flex-1">
+                                <label className="label">
+                                    <span className="label-text text-black font-poppins font-bold text-center">Pilih Periode Waktu (*jika memilih tersedia) </span>
+                                </label>
+                                <select className="select select-bordered w-full max-w-xs bg-white font-poppins text-black">
+                                    <option disabled selected>12.00</option>
+                                    <option>13.00</option>
+                                    <option>14.00</option>
+                                </select>
+                            </div>
+                            <div className="flex-col space-x-3">
+                                <label className="label ">
+                                    <span className="ml-3 label-text text-black font-poppins font-bold mt-10"></span>
+                                </label>
+                                <select className="select select-bordered w-full max-w-xs bg-white font-poppins text-black">
+                                    <option disabled selected>15.00</option>
+                                    <option>16.00</option>
+                                    <option>17.00</option>
+                                    <option>18.00</option>
+                                    <option>19.00</option>
+                                    <option>20.00</option>
+                                </select>
+                            </div>
                     </div>
                 </div>
                 <div className="flex-col">
@@ -242,4 +271,4 @@ const UploadNew = () =>{
     )
 }
 
-export default UploadNew;
+export default EditUpdate;

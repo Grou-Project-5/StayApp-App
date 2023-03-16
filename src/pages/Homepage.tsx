@@ -1,14 +1,10 @@
 import Button from "components/Button";
 import Card from "components/Card";
 import Layout from "components/Layout";
-import { useState, useEffect } from "react";
-
 import { useNavigate } from "react-router";
-import axios from "axios";
 
 import imgHeader from "../assets/header.webp";
 import img1 from "../assets/img-1 (1).webp";
-import { getHomepageRoom } from "utils/Datatypes";
 
 const Homepage = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -32,11 +28,13 @@ const Homepage = () => {
     fetchDataRoom();
   }, []);
 
+
   return (
     <>
       <Layout>
         <Header />
         <div className="w-full min-h-screen flex justify-center pl-6 mt-10 overflow-hidden">
+
           {dataRoom?.map((item) => {
             return (
               <>
@@ -54,6 +52,8 @@ const Homepage = () => {
               </>
             );
           })}
+
+        
         </div>
         <div className="text-center w-full">
           <Button
