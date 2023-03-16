@@ -12,6 +12,7 @@ import Profile from "pages/Profile";
 import EditProfile from "pages/EditProfile";
 import ListHomestay from "pages/ListingHomestay";
 import DaftarUpload from "pages/DaftarUpload";
+import UploadNew from "pages/UploadNewHomestay";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
   {
     path: "/daftarUpload",
     element: <DaftarUpload />,
+  },
+  {
+    path: "/uploadNew",
+    element: <UploadNew />,
   },
 ]);
 

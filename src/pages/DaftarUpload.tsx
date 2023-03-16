@@ -33,6 +33,7 @@ const DaftarUpload = () =>{
                     place="Bali, Indonesia"
                     avail="Available"
                     price="$200/Malam"
+                       
                     />
                     <Card
                     image={img1}
