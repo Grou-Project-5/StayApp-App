@@ -1,7 +1,3 @@
-import React from "react";
-import { RouterProvider } from "react-router";
-import { createBrowserRouter } from "react-router-dom";
-
 import Login from "pages/Auth/Login";
 import Register from "pages/Auth/Register";
 import DetailHomestay from "pages/DetailHomestay";
@@ -16,8 +12,6 @@ import Profile from "pages/Profile";
 import EditProfile from "pages/EditProfile";
 import ListHomestay from "pages/ListingHomestay";
 import DaftarUpload from "pages/DaftarUpload";
-
-
 
 const App = () => {
   const [cookie, , removeCookie] = useCookies(["token"]);
@@ -48,30 +42,30 @@ const App = () => {
     },
     {
       path: "/detailPesanan",
-      element: checkToken ? <DetailPesanan /> : <Login />,
+      element: <DetailPesanan />,
     },
     {
       path: "/konfirmasiPemesanan",
-      element: checkToken ? <KonfirmasiPemesanan /> : <Login />,
+      element: <KonfirmasiPemesanan />,
     },
     {
       path: "/profile",
-      element: checkToken ? <Profile /> : <Login />,
+      element: <Profile />,
     },
-  {
-    path: "/editProfile",
-    element: <EditProfile />,
-  },
-  {
-    path: "/listHomestay",
-    element: <ListHomestay />,
-  },
-  {
-    path: "/daftarUpload",
-    element: <DaftarUpload />,
-  },
+    {
+      path: "/editProfile",
+      element: <EditProfile />,
+    },
+    {
+      path: "/listHomestay",
+      element: <ListHomestay />,
+    },
+    {
+      path: "/daftarUpload",
+      element: <DaftarUpload />,
+    },
   ]);
-  
+
   return <RouterProvider router={router} />;
 };
 

@@ -1,24 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import imgLogo from "assets/Logo.webp";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "utils/Swal";
 import useCookies from "react-cookie/cjs/useCookies";
 import { handleAuth } from "utils/redux/reducer";
 import Button from "./Button";
+import axios from "axios";
+import { getProfile } from "utils/Datatypes";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const MySwal = withReactContent(Swal);
 
+  const [profile, setProfile] = useState<getProfile[]>([]);
+
   const [cookie, , removeCookie] = useCookies(["token"]);
   const checkToken = cookie.token;
 
   const handleLogout = async () => {
     removeCookie("token");
+    localStorage.removeItem("dataProfile");
+    localStorage.clear();
 
     dispatch(handleAuth(false));
     navigate("/");
@@ -28,6 +34,7 @@ const Navbar = () => {
       showCancelButton: false,
     });
   };
+
   return (
     <>
       <div className="navbar bg-white border-2 border-stroke-nav h-[7rem] p-10">
@@ -111,12 +118,21 @@ const Navbar = () => {
                   tabIndex={0}
                   className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
                 >
-                  <li>
-                    <Link to="/profile" className="justify-between">
-                      Profile
-                      <span className="badge">New</span>
-                    </Link>
-                  </li>
+                  <>
+                    <li>
+                      <a
+                        className="justify-between"
+                        onClick={() => {
+                          navigate("/profile");
+                          window.location.reload();
+                        }}
+                      >
+                        Profile
+                        <span className="badge">New</span>
+                      </a>
+                    </li>
+                  </>
+
                   <li>
                     <a>Histori</a>
                   </li>
