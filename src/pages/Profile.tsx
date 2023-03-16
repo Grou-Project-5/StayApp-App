@@ -3,12 +3,14 @@ import React, { useState, useEffect } from "react";
 import Layout from "components/Layout";
 import imgAva from "assets/woman.png";
 
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import { getProfile } from "utils/Datatypes";
+import Button from "components/Button";
 
 const Profile = () => {
+  const navigate = useNavigate();
   const [cookie, setCookie] = useCookies(["token"]);
   const checkToken = cookie.token;
   const [loading, setLoading] = useState<boolean>(false);
@@ -21,37 +23,27 @@ const Profile = () => {
   const [gender, setGender] = useState<string>("");
   const [pictures, setPictures] = useState<string>("");
 
-  useEffect(() => {
-    const fetchDataApi = () => {
-      setLoading(true);
-      axios
-        .get(`http://54.255.147.31/users`, {
-          headers: {
-            Authorization: `Bearer ${checkToken}`,
-          },
-        })
-        .then((res) => {
-          const { data } = res.data;
-          // localStorage.setItem("dataProfile", JSON.stringify(data));
-          setProfile(data);
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => setLoading(false));
-    };
-
-    fetchDataApi();
-  }, []);
-
-  // async function loadData() {
-  //   const getData = await localStorage.getItem("dataProfile");
-  //   const profileData = JSON.parse(getData || "[]");
-  //   setProfile(profileData);
-  // }
-
   // useEffect(() => {
-  //   loadData();
+  //   const fetchDataApi = () => {
+  //     setLoading(true);
+  //     axios
+  //       .get(`http://54.255.147.31/users`, {
+  //         headers: {
+  //           Authorization: `Bearer ${checkToken}`,
+  //         },
+  //       })
+  //       .then((res) => {
+  //         const { data } = res.data;
+  //         // localStorage.setItem("dataProfile", JSON.stringify(data));
+  //         setProfile(data);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       })
+  //       .finally(() => setLoading(false));
+  //   };
+
+  //   fetchDataApi();
   // }, []);
 
   return (
@@ -79,9 +71,19 @@ const Profile = () => {
           <p className="text-black font-bold text-3xl font-poppins mt-4 mb-2 text-center">
             Alamat: {profile.address}
           </p>
-          <button className="btn btn-active bg-red-500 text-zinc-50 font-poppins mt-10 mb-4">
-            Edit Profil
-          </button>
+          <div className="flex flex-row gap-10">
+            <Button
+              id="btn-edit"
+              label="Edit Profil"
+              className="btn btn-active bg-red-500 text-zinc-50 font-poppins mt-10 mb-4 border-none"
+              onClick={() => navigate("/editProfile")}
+            />
+            <Button
+              id="btn-edit"
+              label="Deactivate Account"
+              className="btn btn-active bg-black text-zinc-50 font-poppins mt-10 mb-4 border-none"
+            />
+          </div>
           <Link
             to="/landingPageListing"
             className="link link-secondary text-red-500 font- font-medium text-3xl font-poppins mt-10 mb-5 text-center"
