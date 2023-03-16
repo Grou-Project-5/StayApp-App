@@ -7,67 +7,53 @@ import imgHeader from "../assets/header.webp";
 import img1 from "../assets/img-1 (1).webp";
 
 const Homepage = () => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [dataRoom, setDataRoom] = useState<getHomepageRoom[]>([]);
+
+  const fetchDataRoom = () => {
+    axios
+      .get("http://54.255.147.31/rooms")
+      .then((res) => {
+        const { data } = res.data;
+        setDataRoom(data);
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    fetchDataRoom();
+  }, []);
+
+
   return (
     <>
       <Layout>
         <Header />
         <div className="w-full min-h-screen flex justify-center pl-6 mt-10 overflow-hidden">
-          <div className="lg:grid lg:grid-cols-3 grid-cols-1 gap-2 overflow-hidden">
-            <Card
-              image={img1}
-              place="Bali, Indonesia"
-              avail="Available"
-              price="$200/Malam"
-            />
-            <Card
-              image={img1}
-              place="Lombok, Indonesia"
-              avail="Unavailable"
-              price="$200/Malam"
-            />
-            <Card
-              image={img1}
-              place="Lombok, Indonesia"
-              avail="Unavailable"
-              price="$200/Malam"
-            />
-            <Card
-              image={img1}
-              place="Lombok, Indonesia"
-              avail="Unavailable"
-              price="$200/Malam"
-            />
-            <Card
-              image={img1}
-              place="Lombok, Indonesia"
-              avail="Unavailable"
-              price="$200/Malam"
-            />
-            <Card
-              image={img1}
-              place="Lombok, Indonesia"
-              avail="Unavailable"
-              price="$200/Malam"
-            />
-            <Card
-              image={img1}
-              place="Lombok, Indonesia"
-              avail="Unavailable"
-              price="$200/Malam"
-            />
-            <Card
-              image={img1}
-              place="Lombok, Indonesia"
-              avail="Unavailable"
-              price="$200/Malam"
-            />
-            <Card
-              image={img1}
-              place="Lombok, Indonesia"
-              avail="Unavailable"
-              price="$200/Malam"
-            />
-          </div>
+
+          {dataRoom?.map((item) => {
+            return (
+              <>
+                <div
+                  className="lg:grid lg:grid-cols-3 grid-cols-1 gap-2 overflow-hidden"
+                  key={item.id}
+                >
+                  <Card
+                    image={item.room_picture}
+                    place={item.room_name}
+                    avail="Available"
+                    price={item.price}
+                  />
+                </div>
+              </>
+            );
+          })}
+
+        
         </div>
         <div className="text-center w-full">
           <Button
