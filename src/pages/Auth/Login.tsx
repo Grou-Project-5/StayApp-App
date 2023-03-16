@@ -29,6 +29,8 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [, setCookie] = useCookies(["token"]);
+  const [cookies, removeCookies] = useCookies(["token"]);
+  const checkToken = cookies.token;
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -52,7 +54,12 @@ const Login = () => {
     };
 
     axios
-      .post("http://54.255.147.31/login", body)
+      .post("http://54.255.147.31/login", body, {
+        headers: {
+          Authorization: `Bearer ${checkToken}`,
+          "Content-Type": "application/json",
+        },
+      })
       .then((res) => {
         const { data, message } = res.data;
 

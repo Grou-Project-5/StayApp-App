@@ -17,3 +17,11 @@ export interface getProfile {
   gender?: string;
   pictures?: any;
 }
+
+export interface EditProfileUser {
+  name?: string;
+  email?: string;
+  address?: string;
+  phone?: string;
+  pictures?: any;
+}

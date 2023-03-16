@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 import imgLogo from "assets/Logo.webp";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -15,8 +15,9 @@ const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const MySwal = withReactContent(Swal);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const [profile, setProfile] = useState<getProfile[]>([]);
+  const [profile, setProfile] = useState<getProfile>({});
 
   const [cookie, , removeCookie] = useCookies(["token"]);
   const checkToken = cookie.token;
@@ -34,6 +35,28 @@ const Navbar = () => {
       showCancelButton: false,
     });
   };
+
+  const fetchDataProfile = () => {
+    setLoading(true);
+    axios
+      .get("http://54.255.147.31/users", {
+        headers: {
+          Authorization: `Bearer ${checkToken}`,
+        },
+      })
+      .then((res) => {
+        const { data } = res.data;
+        setProfile(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    fetchDataProfile();
+  }, []);
 
   return (
     <>
@@ -111,7 +134,7 @@ const Navbar = () => {
               <div className="dropdown dropdown-end">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <div className="w-10 rounded-full">
-                    <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                    <img src={profile.pictures} />
                   </div>
                 </label>
                 <ul
@@ -124,7 +147,6 @@ const Navbar = () => {
                         className="justify-between"
                         onClick={() => {
                           navigate("/profile");
-                          window.location.reload();
                         }}
                       >
                         Profile

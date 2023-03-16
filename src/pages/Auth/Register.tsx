@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 
 import withReactContent from "sweetalert2-react-content";
 import Swal from "utils/Swal";
@@ -23,7 +24,8 @@ const background = {
 const Register = () => {
   const navigate = useNavigate();
   const MySwal = withReactContent(Swal);
-
+  const [cookie, , removeCookie] = useCookies(["token"]);
+  const checkToken = cookie.token;
   const [disabled, setDisabled] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -60,7 +62,12 @@ const Register = () => {
     };
 
     axios
-      .post("http://54.255.147.31/register", body)
+      .post("http://54.255.147.31/register", body, {
+        headers: {
+          Authorization: `Bearer ${checkToken}`,
+          "Content-Type": "application/json",
+        },
+      })
       .then((res) => {
         const { message } = res.data;
         console.log(res.data);

@@ -23,35 +23,35 @@ const Profile = () => {
   const [gender, setGender] = useState<string>("");
   const [pictures, setPictures] = useState<string>("");
 
-  // useEffect(() => {
-  //   const fetchDataApi = () => {
-  //     setLoading(true);
-  //     axios
-  //       .get(`http://54.255.147.31/users`, {
-  //         headers: {
-  //           Authorization: `Bearer ${checkToken}`,
-  //         },
-  //       })
-  //       .then((res) => {
-  //         const { data } = res.data;
-  //         // localStorage.setItem("dataProfile", JSON.stringify(data));
-  //         setProfile(data);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       })
-  //       .finally(() => setLoading(false));
-  //   };
+  useEffect(() => {
+    const fetchDataApi = () => {
+      setLoading(true);
+      axios
+        .get(`http://54.255.147.31/users`, {
+          headers: {
+            Authorization: `Bearer ${checkToken}`,
+          },
+        })
+        .then((res) => {
+          const { data } = res.data;
+          // localStorage.setItem("dataProfile", JSON.stringify(data));
+          setProfile(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => setLoading(false));
+    };
 
-  //   fetchDataApi();
-  // }, []);
+    fetchDataApi();
+  }, []);
 
   return (
     <Layout>
       return (
       <>
         <div className="w-full h-full flex flex-col items-center justify-center">
-          <h2 className=" text-black font-extrabold text-5xl font-poppins mt-2 mb-24">
+          <h2 className=" text-black font-extrabold text-2xl font-poppins mt-32 mb-10 ">
             Informasi Pribadi
           </h2>
           <img
