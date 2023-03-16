@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Input from "components/Input";
 import Layout from "components/Layout";
 import Button from "components/Button";
-import img1 from "../assets/img-1 (1).webp";
+import img1 from "assets/img-1 (1).webp";
 
 const UploadNew = () =>{
     return(
