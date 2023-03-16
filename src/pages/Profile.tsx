@@ -34,7 +34,7 @@ const Profile = () => {
         })
         .then((res) => {
           const { data } = res.data;
-          // localStorage.setItem("dataProfile", JSON.stringify(data));
+
           setProfile(data);
         })
         .catch((err) => {
@@ -86,7 +86,7 @@ const Profile = () => {
             />
           </div>
           <Link
-            to="/landingPageListing"
+            to="/listHomestay"
             className="link link-secondary text-red-500 font- font-medium text-3xl font-poppins mt-10 mb-5 text-center"
           >
             Tertarik Menyewakan Homestay ?

@@ -1,8 +1,8 @@
 export interface getHomepageRoom {
   id?: string;
-  room_picture?: any;
+  pictures?: string;
   user_id?: string;
-  room_name?: string;
+  name?: string;
   price?: string;
   description?: string;
   location?: string;
@@ -26,6 +26,31 @@ export interface EditProfileUser {
   pictures?: any;
 }
 
+export interface Submit {
+  id?: number;
+  pictures?: any;
+  name?: string;
+  price?: number;
+  location?: number;
+  description?: string;
+  max_visitors?: number;
+  special_access?: string;
+  bedroom?: string;
+  room_total?: number;
+  kitchen?: string;
+  wifi?: string;
+  garage?: string;
+  excellent_features?: string;
+  cleaning_fee?: number;
+  service_fee?: number;
+  bring_animal?: string;
+  check_in?: string;
+  user_phone?: string;
+  check_out?: string;
+  take_photo?: string;
+  other?: string;
+}
+
 export interface getFeedback {
   id?: number;
   rating?: number;
@@ -39,3 +64,4 @@ export interface getHistory{
   status?: string;
   ulasan?:  string;
 }
+

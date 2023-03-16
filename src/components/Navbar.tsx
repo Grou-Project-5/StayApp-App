@@ -39,7 +39,7 @@ const Navbar = () => {
   const fetchDataProfile = () => {
     setLoading(true);
     axios
-      .get("http://54.255.147.31/users", {
+      .get("https://group5.altapro.online/users", {
         headers: {
           Authorization: `Bearer ${checkToken}`,
         },
@@ -95,9 +95,12 @@ const Navbar = () => {
               </ul>
             </ul>
           </div>
-          <a className="btn btn-ghost normal-case text-xl text-black hidden lg:flex">
+          <Link
+            to="/"
+            className="btn btn-ghost normal-case text-xl text-black hidden lg:flex"
+          >
             <img src={imgLogo} width="45" />
-          </a>
+          </Link>
         </div>
         <div className="navbar-center ">
           {/* The button to open modal */}
