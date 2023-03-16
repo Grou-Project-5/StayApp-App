@@ -3,6 +3,7 @@ import React from "react";
 import Layout from "components/Layout";
 import imgHeader from "assets/img-1 (1).webp";
 import location from "assets/location.webp";
+import Button from "components/Button";
 
 const background = {
     backgroundImage: `url(${imgHeader})`,
@@ -52,6 +53,11 @@ const UlasanRating = () => {
                     </div>
                 </div>
             </div>
+            <Button
+                id="btn-submit"
+                label="Submit Ulasan"
+                className="bg-bg-button w-30 lg:w-2/12 ml-72 mt-20 rounded-lg py-2 text-white font-poppins font-semibold hover:bg-red-600 text-xl"          
+            />
             <h1 className="text-slate-500 font-bold font-poppins text-center mt-20 pb-10 text-xl">
                 Copyright @2023 StayApp
             </h1>
