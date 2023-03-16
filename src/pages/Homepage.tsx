@@ -5,6 +5,9 @@ import { useNavigate } from "react-router";
 
 import imgHeader from "../assets/header.webp";
 import img1 from "../assets/img-1 (1).webp";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { getHomepageRoom } from "utils/Datatypes";
 
 const Homepage = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -12,7 +15,7 @@ const Homepage = () => {
 
   const fetchDataRoom = () => {
     axios
-      .get("http://54.255.147.31/rooms")
+      .get("https://group5.altapro.online/rooms")
       .then((res) => {
         const { data } = res.data;
         setDataRoom(data);
@@ -28,13 +31,11 @@ const Homepage = () => {
     fetchDataRoom();
   }, []);
 
-
   return (
     <>
       <Layout>
         <Header />
         <div className="w-full min-h-screen flex justify-center pl-6 mt-10 overflow-hidden">
-
           {dataRoom?.map((item) => {
             return (
               <>
@@ -52,8 +53,6 @@ const Homepage = () => {
               </>
             );
           })}
-
-        
         </div>
         <div className="text-center w-full">
           <Button
