@@ -27,7 +27,7 @@ const Profile = () => {
     const fetchDataApi = () => {
       setLoading(true);
       axios
-        .get(`http://54.255.147.31/users`, {
+        .get(`https://group5.altapro.online/users`, {
           headers: {
             Authorization: `Bearer ${checkToken}`,
           },

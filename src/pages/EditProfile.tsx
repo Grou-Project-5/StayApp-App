@@ -38,7 +38,7 @@ const EditProfile = () => {
     }
 
     axios
-      .put("http://54.255.147.31/users", formData, {
+      .put("https://group5.altapro.online/users", formData, {
         headers: {
           Authorization: `Bearer ${checkToken}`,
           "Content-Type": "multipart/form-data",
@@ -72,7 +72,7 @@ const EditProfile = () => {
     const fetchDataProfile = () => {
       setLoading(true);
       axios
-        .get("http://54.255.147.31/users", {
+        .get("https://group5.altapro.online/users", {
           headers: {
             Authorization: `Bearer ${checkToken}`,
           },
@@ -98,7 +98,7 @@ const EditProfile = () => {
             <h1 className="text-black font-bold font-poppins text-2xl text-center">
               Edit Profile
             </h1>
-            <img src={picture} className="w-4/12 mx-auto mt-5 " />
+            <img src={picture} className="w-4/12 mx-auto mt-5" />
             <Input
               id="input-file"
               type="file"

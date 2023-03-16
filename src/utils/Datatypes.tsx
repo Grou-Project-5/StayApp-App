@@ -1,6 +1,6 @@
 export interface getHomepageRoom {
   id?: string;
-  room_picture?: string;
+  room_picture?: any;
   user_id?: string;
   room_name?: string;
   price?: string;

@@ -62,7 +62,7 @@ const Register = () => {
     };
 
     axios
-      .post("http://54.255.147.31/register", body, {
+      .post("https://group5.altapro.online/register", body, {
         headers: {
           Authorization: `Bearer ${checkToken}`,
           "Content-Type": "application/json",
