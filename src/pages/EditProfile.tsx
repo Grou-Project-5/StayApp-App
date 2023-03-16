@@ -94,11 +94,14 @@ const EditProfile = () => {
     <Layout>
       <div className="w-full min-h-screen">
         <div className="flex flex-row mt-10">
-          <div className="flex-1 flex-col ">
+          <div className="flex-1  flex-col ">
             <h1 className="text-black font-bold font-poppins text-2xl text-center">
               Edit Profile
             </h1>
-            <img src={picture} className="w-4/12 mx-auto mt-5" />
+            <img
+              src={picture}
+              className="w-4/12 mx-auto mt-5 rounded-full h-3/6"
+            />
             <Input
               id="input-file"
               type="file"
