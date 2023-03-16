@@ -35,7 +35,10 @@ export default function DetailHomestay() {
               Contact Person: 0822XXXX
             </p>
           </div>
-          <div className=" rounded-2xl" style={background}></div>
+          <div
+            className=" rounded-2xl bg-no-repeat bg-auto bg-center"
+            style={background}
+          ></div>
           <div className="flex flex-row w-[80%] min-h-screen mt-20">
             <div className="w-[65%] text-black">
               <div className="flex flex-col w-11/12">
