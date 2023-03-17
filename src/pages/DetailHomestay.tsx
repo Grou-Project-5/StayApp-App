@@ -3,27 +3,27 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 
 import Layout from "components/Layout";
-//import CardUlasan from "components/CardUlasan";
 import imgDetail from "assets/prateek-gupta-aL_z92TK3SA-unsplash.jpg";
 import location from "assets/location.webp";
 import Input from "components/Input";
 import Button from "components/Button";
 import avatar from "assets/avatar.webp";
 import { getFeedback } from "utils/Datatypes";
-
-
-const background = {
-  width: "80%",
-  height: "25rem",
-  backgroundImage: `url(${imgDetail})`,
-  backgroundSize: "cover",
-  backgroundRepeat: "no-repeat",
-};
+import { getDataHomestay } from "utils/Datatypes";
+import { useCookies } from "react-cookie";
+import { useParams } from "react-router";
+import imgIcon from "../assets/double-bed 1.webp";
+import imgIcon2 from "../assets/room 1.webp";
 
 export default function DetailHomestay() {
+  const [cookie, setCookie] = useCookies(["token"]);
+  const checkToken = cookie.token;
+  const [dataRoom, setDataRoom] = useState<getDataHomestay>({});
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(false);
   const [dataUlasan, setDataUlasan] = useState<getFeedback[]>([]);
+  const [getHomestay, setGetHomestay] = useState<getDataHomestay>({});
+  const { id } = useParams();
 
   const fetchDataUlasan = () => {
     axios
@@ -42,27 +42,56 @@ export default function DetailHomestay() {
     fetchDataUlasan();
   }, []);
 
+  const fetchDataGetUpdate = () => {
+    axios
+      .get(`https://group5.altapro.online/rooms/${id}`, {
+        headers: {
+          Authorization: `Bearer ${checkToken}`,
+        },
+      })
+      .then((res) => {
+        const { data } = res.data;
+        setGetHomestay(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    fetchDataGetUpdate();
+  }, []);
+
   return (
     <>
       <Layout>
         <div className="w-full min-h-screen flex flex-col bg-white items-center mt-10">
           <h1 className="text-black font-semibold w-9/12 flex justify-start text-2xl font-poppins">
-            Private Beach Villa - cook, dolphins, snorkeling
+            {getHomestay.name}
           </h1>
           <div className="flex flex-row w-9/12 mt-5 mb-5">
             <img src={location} width="30" />
             <p className="w-[30%] font-poppin text-slate-500 ml-3 text-xl font-semibold">
-              Bali, Indonesia{" "}
-              <span className="ml-5 text-text-card ">Available</span>
+              {getHomestay.location}
+              <span className="ml-5 text-text-card ">
+                {getHomestay.availability}
+              </span>
             </p>
 
             <p className="font-semibold w-[70%] flex justify-end items-end text-xl text-slate-500">
-              Contact Person: 0822XXXX
+              Contact Person: {getHomestay.user_phone}
             </p>
           </div>
           <div
             className=" rounded-2xl bg-no-repeat bg-auto bg-center"
-            style={background}
+            style={{
+              width: "80%",
+              height: "25rem",
+              backgroundImage: `url(${getHomestay.pictures})`,
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+            }}
           ></div>
           <div className="flex flex-row w-[80%] min-h-screen mt-20">
             <div className="w-[65%] text-black">
@@ -71,57 +100,54 @@ export default function DetailHomestay() {
                   Deskripsi Tempat:
                 </h1>
                 <p className="text-black font-normal font-poppins text-lg mt-8">
-                  The villa is located in the middle of the nature and culture
-                  of the north of Bali, between the beach and the rice fields,
-                  in a quiet bay with dolphins, away from traffic noise and the
-                  hectic life of South Bali, between Lovina and Pemuteran.Come
-                  to enjoy an unforgettable holiday, with family, friends or for
-                  a romantic hide-away in your own beachfront villa with pool.{" "}
+                  {getHomestay.description}
                 </p>
                 <h1 className="text-black text-2xl font-bold font-poppins mt-10">
                   Fasilitas yang ditawarkan :
                 </h1>
                 <div className="flex flex-col ">
                   <span className="flex mt-5">
-                    <p className="ml-5">Akses Khusus Ke Pantai</p>
+                    <img src={imgIcon} />
+                    <p className="ml-5">{getHomestay.special_access}</p>
                   </span>
                   <span className="flex mt-5">
-                    <img src="../assets/img-1 (1).webp" />
-                    <p className="ml-5">4 Tempat Tidur</p>
+                    <img src={imgIcon2} />
+                    <p className="ml-5">
+                      {getHomestay.bedroom} Ruangan Kamar Tidur
+                    </p>
                   </span>
                   <span className="flex mt-5">
-                    <img src="../assets/img-1 (1).webp" />
-                    <p className="ml-5">6 Ruangan</p>
+                    <img src={imgIcon2} />
+                    <p className="ml-5">
+                      {getHomestay.room_total} Ruangan Kamar{" "}
+                    </p>
+                  </span>
+
+                  <span className="flex mt-5">
+                    <img src={imgIcon2} />
+                    <p className="ml-5">{getHomestay.kitchen}</p>
                   </span>
                   <span className="flex mt-5">
-                    <img src="../assets/img-1 (1).webp" />
-                    <p className="ml-5">4 Kamar Mandi + ruang toilet</p>
+                    <img src={imgIcon2} />
+                    <p className="ml-5">{getHomestay.wifi}</p>
                   </span>
                   <span className="flex mt-5">
-                    <img src="../assets/img-1 (1).webp" />
-                    <p className="ml-5">Dapur</p>
+                    <img src={imgIcon2} />
+                    <p className="ml-5">{getHomestay.garage}</p>
                   </span>
                   <span className="flex mt-5">
-                    <img src="../assets/img-1 (1).webp" />
-                    <p className="ml-5">Wifi</p>
-                  </span>
-                  <span className="flex mt-5">
-                    <img src="../assets/img-1 (1).webp" />
-                    <p className="ml-5">Area Parkir / Garasi</p>
-                  </span>
-                  <span className="flex mt-5">
-                    <img src="../assets/img-1 (1).webp" />
-                    <p className="ml-5">Kolam Renang Luar Ruangan</p>
+                    <img src={imgIcon2} />
+                    <p className="ml-5">{getHomestay.excellent_features}</p>
                   </span>
                 </div>
                 <h1 className="text-black text-2xl font-bold font-poppins mt-10">
                   Peraturan Rumah
                 </h1>
                 <p className="text-black font-semibold mt-3">
-                  Check-in: 15.00 - 02.00
+                  Check-in: {getHomestay.check_in}
                 </p>
                 <p className="text-black font-semibold mt-3">
-                  Check-out sebelum 12.00
+                  Check-out sebelum {getHomestay.check_out}
                 </p>
                 <p className="text-black font-semibold mt-3">
                   Maksimum Pengunjung 8 Orang
@@ -129,7 +155,7 @@ export default function DetailHomestay() {
                 {/* The button to open modal */}
                 <label
                   htmlFor="my-modal-5"
-                  className="text-black font-bold text-lg mt-5"
+                  className="text-black font-bold text-lg mt-5 "
                 >
                   Lihat lebih banyak...
                 </label>
@@ -141,13 +167,36 @@ export default function DetailHomestay() {
                   className="modal-toggle"
                 />
                 <div className="modal">
-                  <div className="modal-box w-11/12 max-w-5xl">
-                    <h3 className="font-bold text-lg">
-                      Congratulations random Internet user!
-                    </h3>
-                    <p className="py-4">
-                      You've been selected for a chance to get one year of
-                      subscription to use Wikipedia for free!
+                  <div className="modal-box w-11/12 max-w-5xl bg-white">
+                    <h1 className="text-black text-2xl font-bold font-poppins mt-10">
+                      Peraturan Rumah
+                    </h1>
+                    <p className="text-black font-semibold mt-3">
+                      Maksimum Pengunjung {getHomestay.max_visitors} Orang
+                    </p>
+                    <p className="text-black font-semibold mt-3">
+                      {getHomestay.bring_animal}
+                    </p>
+                    <h1 className="text-black text-2xl font-bold font-poppins mt-10">
+                      Apa saja yang diperbolehkan
+                    </h1>
+                    <p className="text-black font-semibold mt-3">
+                      Check-in: {getHomestay.check_in}
+                    </p>
+                    <p className="text-black font-semibold mt-3">
+                      Check-out sebelum : {getHomestay.check_out}
+                    </p>
+                    <p className="text-black font-semibold mt-3">
+                      Check-in mandiri dengan Petugas Gedung
+                    </p>
+                    <p className="text-black font-semibold mt-3">
+                      {getHomestay.take_photo}
+                    </p>
+                    <h1 className="text-black text-2xl font-bold font-poppins mt-10">
+                      Peraturan Tambahan
+                    </h1>
+                    <p className="text-black font-semibold mt-3">
+                      {getHomestay.other}
                     </p>
                     <div className="modal-action">
                       <label htmlFor="my-modal-5" className="btn">
@@ -159,9 +208,7 @@ export default function DetailHomestay() {
                 <h1 className="text-black text-2xl font-bold font-poppins mt-5">
                   Ulasan (4 Orang)
                 </h1>
-                {/* {dataUlasan?.map((ulasan) =>{
-                  <CardUlasan cardulasan={ulasan} />
-                })} */}
+
                 <div className="flex w-full justify-center">
                   <Button
                     id="loadMore"

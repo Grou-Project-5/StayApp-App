@@ -102,7 +102,6 @@ const Navbar = () => {
         </div>
 
         <div className="navbar-end">
-          <input type="checkbox" className="toggle mr-5 lg:flex hidden" />
           {checkToken ? (
             <>
               <div className="dropdown dropdown-end">
@@ -130,7 +129,7 @@ const Navbar = () => {
                   </>
 
                   <li>
-                    <a>Histori</a>
+                    <Link to="/history">Histori</Link>
                   </li>
                   <li>
                     <a

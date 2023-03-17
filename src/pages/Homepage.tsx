@@ -12,6 +12,7 @@ import { getHomepageRoom } from "utils/Datatypes";
 const Homepage = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [dataRoom, setDataRoom] = useState<getHomepageRoom[]>([]);
+  const navigate = useNavigate();
 
   const fetchDataRoom = () => {
     axios
@@ -39,13 +40,21 @@ const Homepage = () => {
             {dataRoom?.map((item) => {
               return (
                 <>
-                  <Card
-                    key={item.id}
-                    image={item.pictures}
-                    place={item.name}
-                    avail="Available"
-                    price={item.price}
-                  />
+                  <div>
+                    <Card
+                      key={item.id}
+                      image={item.pictures}
+                      place={item.name}
+                      avail="Available"
+                      price={item.price}
+                    />
+                    <Button
+                      id="btn-edit"
+                      label="Detail Penginapan"
+                      className="btn ml-7 bg-bg-button border-none hover:bg-red-500 text-white"
+                      onClick={() => navigate(`/detailHomestay/${item.id}`)}
+                    />
+                  </div>
                 </>
               );
             })}
