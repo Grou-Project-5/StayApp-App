@@ -87,12 +87,10 @@ const Navbar = () => {
               className="menu menu-compact dropdown-content mt-3 p-5 shadow bg-base-100 rounded-box w-64"
             >
               <li>
-                <a className="text-lg">Home</a>
+                <Link to="/" className="text-lg">
+                  Home
+                </Link>
               </li>
-              <ul className="flex flex-row">
-                <li className="ml-4">Light / Dark Mode</li>
-                <input type="checkbox" className="toggle ml-5" />
-              </ul>
             </ul>
           </div>
           <Link
@@ -102,34 +100,7 @@ const Navbar = () => {
             <img src={imgLogo} width="45" />
           </Link>
         </div>
-        <div className="navbar-center ">
-          {/* The button to open modal */}
-          <label
-            htmlFor="my-modal-5"
-            className="text-black font-bold text-lg lg:text-2xl"
-          >
-            How To Book
-          </label>
 
-          {/* Put this part before </body> tag */}
-          <input type="checkbox" id="my-modal-5" className="modal-toggle" />
-          <div className="modal">
-            <div className="modal-box w-11/12 max-w-5xl">
-              <h3 className="font-bold text-lg">
-                Congratulations random Internet user!
-              </h3>
-              <p className="py-4">
-                You've been selected for a chance to get one year of
-                subscription to use Wikipedia for free!
-              </p>
-              <div className="modal-action">
-                <label htmlFor="my-modal-5" className="btn">
-                  Yay!
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
         <div className="navbar-end">
           <input type="checkbox" className="toggle mr-5 lg:flex hidden" />
           {checkToken ? (

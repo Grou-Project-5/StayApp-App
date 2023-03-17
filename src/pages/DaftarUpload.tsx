@@ -8,11 +8,40 @@ import Button from "components/Button";
 import { useNavigate } from "react-router";
 import { getHomepageRoom } from "utils/Datatypes";
 import axios from "axios";
+import { useCookies } from "react-cookie";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "utils/Swal";
 
 const DaftarUpload = () => {
+  const MySwal = withReactContent(Swal);
+  const [cookie, setCookie] = useCookies(["token"]);
+  const checkToken = cookie.token;
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(false);
   const [listingUser, setListingUser] = useState<getHomepageRoom[]>([]);
+
+  const handleDeleteHomestay = async (id: getHomepageRoom[]) => {
+    axios
+      .delete(` https://group5.altapro.online/rooms/${id}`, {
+        headers: {
+          Authorization: `Bearer ${checkToken}`,
+        },
+      })
+      .then((res) => {
+        const { data, message } = res.data;
+        setListingUser(data);
+
+        MySwal.fire({
+          title: "Data Homestay Successfully Deleted",
+          text: message,
+          showCancelButton: false,
+        });
+        setListingUser(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const fetchDataListUser = () => {
     axios
@@ -39,6 +68,7 @@ const DaftarUpload = () => {
             id="btn-back"
             label="Kembali"
             className="bg-bg-button w-52 lg:w-3/12 mt-10 rounded-lg py-4 text-white font-poppins font-semibold hover:bg-red-600 text-xl"
+            onClick={() => navigate("/listHomestay")}
           />
         </div>
         <h1 className="text-black font-extrabold font-poppins text-3xl justify-center items-center">
@@ -83,6 +113,7 @@ const DaftarUpload = () => {
                           id="btn-hapus"
                           label="Delete"
                           className="btn ml-7 bg-bg-button border-none hover:bg-red-500 text-white"
+                          onClick={handleDeleteHomestay}
                         />
                       </div>
                     </div>
