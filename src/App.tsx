@@ -1,6 +1,6 @@
 import React from "react";
 import { RouterProvider } from "react-router";
-import { createBrowserRouter } from "react-router-dom";
+import { Navigate, createBrowserRouter } from "react-router-dom";
 import useCookies from "react-cookie/cjs/useCookies";
 import axios from "axios";
 
@@ -44,51 +44,51 @@ const App = () => {
     },
     {
       path: "/detailHomestay/:id",
-      element: <DetailHomestay />,
+      element: checkToken ? <DetailHomestay /> : <Navigate to="/" />,
     },
     {
       path: "/detailPesanan",
-      element: <DetailPesanan />,
+      element: checkToken ? <DetailPesanan /> : <Navigate to="/" />,
     },
     {
       path: "/konfirmasiPemesanan",
-      element: <KonfirmasiPemesanan />,
+      element: checkToken ? <KonfirmasiPemesanan /> : <Navigate to="/" />,
     },
     {
       path: "/profile/:id",
-      element: <Profile />,
+      element: checkToken ? <Profile /> : <Navigate to="/" />,
     },
     {
       path: "/editProfile/:id",
-      element: <EditProfile />,
+      element: checkToken ? <EditProfile /> : <Navigate to="/" />,
     },
     {
       path: "/listHomestay",
-      element: <ListHomestay />,
+      element: checkToken ? <ListHomestay /> : <Navigate to="/" />,
     },
     {
       path: "/daftarUpload",
-      element: <DaftarUpload />,
+      element: checkToken ? <DaftarUpload /> : <Navigate to="/" />,
     },
     {
       path: "/deact",
-      element: <DeactivateAcc />,
+      element: checkToken ? <DeactivateAcc /> : <Navigate to="/" />,
     },
     {
       path: "/uploadNew",
-      element: <UploadNew />,
+      element: checkToken ? <UploadNew /> : <Navigate to="/" />,
     },
     {
       path: "/editUpdate/:id",
-      element: <EditUpdate />,
+      element: checkToken ? <EditUpdate /> : <Navigate to="/" />,
     },
     {
       path: "/ulasanRating",
-      element: <UlasanRating />,
+      element: checkToken ? <UlasanRating /> : <Navigate to="/" />,
     },
     {
       path: "/history",
-      element: <History />,
+      element: checkToken ? <History /> : <Navigate to="/" />,
     },
   ]);
 
