@@ -1,10 +1,10 @@
-# StayApp-App
+# StayApp
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/102293238/225806690-3e5c4011-85a5-413a-8cad-8ee53814b961.png" />
+  <img width="450" height="550"  src="https://user-images.githubusercontent.com/102293238/225806690-3e5c4011-85a5-413a-8cad-8ee53814b961.png" />
 </p>
 <p align="center">
-StayApp is a Applicatio to Book Villa 
+StayApp is a Application to Book Homestay
 <br />
 
 # Table of Content
@@ -129,11 +129,18 @@ npm run dev
  
 [Discord](https://discord.com/)
 
-  <br />
-  
+  # 🤖 Front-End Team
+
+ M. Gumilang Tamasakti:
+
+  [![GitHub](https://img.shields.io/badge/-Tama-black?style=for-the-badge&logo=github&logoColor=white)](https://github.com/tamasakti) 
+
+Qonik Fajriyah :
+
+  [![GitHub](https://img.shields.io/badge/-Qonik-black?style=for-the-badge&logo=github&logoColor=white)](https://github.com/fmqonik) 
+
 
   <br />
-
 
 <h5>
 <p align="center">2023 StayApp Team </p>
