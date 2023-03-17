@@ -6,12 +6,30 @@ import Card from "components/Card";
 import img1 from "../assets/img-1 (1).webp";
 import Button from "components/Button";
 import { useNavigate } from "react-router";
+import { getHomepageRoom } from "utils/Datatypes";
+import axios from "axios";
 
 const DaftarUpload = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(false);
+  const [listingUser, setListingUser] = useState<getHomepageRoom[]>([]);
 
-  useEffect(() => {}, []);
+  const fetchDataListUser = () => {
+    axios
+      .get("https://group5.altapro.online/room")
+      .then((res) => {
+        const { data } = res.data;
+        setListingUser(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    fetchDataListUser();
+  }, []);
 
   return (
     <Layout>
@@ -37,60 +55,42 @@ const DaftarUpload = () => {
       </div>
       <div className="w-full min-h-screen flex justify-center pl-6 mt-10 overflow-hidden">
         <div className="font-poppins lg:grid lg:grid-cols-3 grid-cols-1 gap-2 overflow-hidden">
-          <Card
-            image={img1}
-            place="Bali, Indonesia"
-            avail="Available"
-            price="$200/Malam"
-          />
-          <Card
-            image={img1}
-            place="Lombok, Indonesia"
-            avail="Unavailable"
-            price="$200/Malam"
-          />
-          <Card
-            image={img1}
-            place="Lombok, Indonesia"
-            avail="Unavailable"
-            price="$200/Malam"
-          />
-          <Card
-            image={img1}
-            place="Lombok, Indonesia"
-            avail="Unavailable"
-            price="$200/Malam"
-          />
-          <Card
-            image={img1}
-            place="Lombok, Indonesia"
-            avail="Unavailable"
-            price="$200/Malam"
-          />
-          <Card
-            image={img1}
-            place="Lombok, Indonesia"
-            avail="Unavailable"
-            price="$200/Malam"
-          />
-          <Card
-            image={img1}
-            place="Lombok, Indonesia"
-            avail="Unavailable"
-            price="$200/Malam"
-          />
-          <Card
-            image={img1}
-            place="Lombok, Indonesia"
-            avail="Unavailable"
-            price="$200/Malam"
-          />
-          <Card
-            image={img1}
-            place="Lombok, Indonesia"
-            avail="Unavailable"
-            price="$200/Malam"
-          />
+          {loading ? (
+            <>
+              <p>Mohon Tunggu Sebentar</p>
+            </>
+          ) : (
+            <>
+              {listingUser?.map((item, index) => {
+                return (
+                  <>
+                    <div>
+                      <Card
+                        key={index}
+                        image={item.pictures}
+                        place={item.name}
+                        avail={item.availability}
+                        price={item.price}
+                      />
+                      <div className="flex flex-row">
+                        <Button
+                          id="btn-edit"
+                          label="Edit"
+                          className="btn ml-7 bg-bg-button border-none hover:bg-red-500 text-white"
+                          onClick={() => navigate(`/editUpdate/${item.id}`)}
+                        />
+                        <Button
+                          id="btn-hapus"
+                          label="Delete"
+                          className="btn ml-7 bg-bg-button border-none hover:bg-red-500 text-white"
+                        />
+                      </div>
+                    </div>
+                  </>
+                );
+              })}
+            </>
+          )}
         </div>
       </div>
       <div className="text-center w-full">

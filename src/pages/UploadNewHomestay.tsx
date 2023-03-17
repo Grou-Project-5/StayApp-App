@@ -10,14 +10,14 @@ import { useCookies } from "react-cookie";
 import axios from "axios";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "utils/Swal";
-import { Submit } from "utils/Datatypes";
+import { getDataHomestay } from "utils/Datatypes";
 
 const UploadNew = () => {
   const navigate = useNavigate();
   const [cookie, setCookie] = useCookies(["token"]);
   const checkToken = cookie.token;
   const [loading, setLoading] = useState<boolean>(false);
-  const [submitHomestay, setSubmitHOmestay] = useState<Submit>({});
+  const [submitHomestay, setSubmitHOmestay] = useState<getDataHomestay>({});
 
   const MySwal = withReactContent(Swal);
 

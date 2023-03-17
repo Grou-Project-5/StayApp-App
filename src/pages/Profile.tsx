@@ -76,7 +76,7 @@ const Profile = () => {
               id="btn-edit"
               label="Edit Profil"
               className="btn btn-active bg-red-500 text-zinc-50 font-poppins mt-10 mb-4 border-none"
-              onClick={() => navigate("/editProfile")}
+              onClick={() => navigate(`/editProfile/${profile.id}`)}
             />
             <Button
               id="btn-edit"
