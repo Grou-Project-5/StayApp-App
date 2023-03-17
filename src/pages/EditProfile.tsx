@@ -54,7 +54,7 @@ const EditProfile = () => {
           showCancelButton: false,
         });
 
-        navigate("/profile");
+        navigate("/");
       })
       .finally(() => setLoading(false));
   };
@@ -160,7 +160,7 @@ const EditProfile = () => {
                   id="btn-back"
                   label="Kembali"
                   className="bg-bg-button w-10/12 lg:w-4/12 rounded-lg py-3 text-white font-poppins font-semibold disabled:bg-slate-400 disabled:cursor-not-allowed hover:cursor-pointer"
-                  onClick={() => navigate("/profile")}
+                  onClick={() => navigate("/")}
                 />
                 <Button
                   id="btn-Update"

@@ -54,12 +54,7 @@ const Login = () => {
     };
 
     axios
-      .post("https://group5.altapro.online/login", body, {
-        headers: {
-          Authorization: `Bearer ${checkToken}`,
-          "Content-Type": "application/json",
-        },
-      })
+      .post("https://group5.altapro.online/login", body)
       .then((res) => {
         const { data, message } = res.data;
 

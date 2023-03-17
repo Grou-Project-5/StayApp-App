@@ -62,12 +62,7 @@ const Register = () => {
     };
 
     axios
-      .post("https://group5.altapro.online/register", body, {
-        headers: {
-          Authorization: `Bearer ${checkToken}`,
-          "Content-Type": "application/json",
-        },
-      })
+      .post("https://group5.altapro.online/register", body)
       .then((res) => {
         const { message } = res.data;
         console.log(res.data);

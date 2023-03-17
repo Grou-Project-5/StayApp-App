@@ -23,26 +23,26 @@ const Profile = () => {
   const [gender, setGender] = useState<string>("");
   const [pictures, setPictures] = useState<string>("");
 
+  const fetchDataApi = () => {
+    setLoading(true);
+    axios
+      .get(`https://group5.altapro.online/users`, {
+        headers: {
+          Authorization: `Bearer ${checkToken}`,
+        },
+      })
+      .then((res) => {
+        const { data } = res.data;
+
+        setProfile(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => setLoading(false));
+  };
+
   useEffect(() => {
-    const fetchDataApi = () => {
-      setLoading(true);
-      axios
-        .get(`https://group5.altapro.online/users`, {
-          headers: {
-            Authorization: `Bearer ${checkToken}`,
-          },
-        })
-        .then((res) => {
-          const { data } = res.data;
-
-          setProfile(data);
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => setLoading(false));
-    };
-
     fetchDataApi();
   }, []);
 
