@@ -223,7 +223,7 @@ export default function DetailHomestay() {
                 <div className="flex flex-row w-[85%] mt-7">
                   <div className="flex-1 justify-start">
                     <h1 className="font-semibold text-xl font-poppins">
-                      $207/Malam
+                      {getHomestay.price}/Malam
                     </h1>
                   </div>
                   <div className="flex-1 justify-end pl-16">
@@ -253,6 +253,7 @@ export default function DetailHomestay() {
                     />
                   </label>
                 </div>
+
                 <Button
                   id="btn-check"
                   label="Check Availibity"
