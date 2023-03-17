@@ -43,7 +43,7 @@ const App = () => {
       element: <Register />,
     },
     {
-      path: "/detailHomestay",
+      path: "/detailHomestay/:id",
       element: <DetailHomestay />,
     },
     {

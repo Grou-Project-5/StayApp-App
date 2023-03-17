@@ -20,12 +20,17 @@ const Card: FC<PropsCard> = ({ image, avail, place, price }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [dataRoom, setDataRoom] = useState<getHomepageRoom[]>([]);
 
+  function onClickDetail() {
+    navigate(`/detailHomestay/${id}`);
+  }
+
   const fetchDataRoom = () => {
     axios
       .get("https://group5.altapro.online/rooms")
       .then((res) => {
         const { data } = res.data;
         setDataRoom(data);
+
         // setId(res.data.id);
       })
       .catch((err) => {
@@ -46,7 +51,6 @@ const Card: FC<PropsCard> = ({ image, avail, place, price }) => {
             src={image}
             alt="logo.svg"
             className="rounded-2xl shadow-lg w-full h-[20rem]  object-fill"
-            onClick={() => navigate(`/detailHomestay`)}
           />
         </figure>
 

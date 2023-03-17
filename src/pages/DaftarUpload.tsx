@@ -20,7 +20,7 @@ const DaftarUpload = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [listingUser, setListingUser] = useState<getHomepageRoom[]>([]);
 
-  const handleDeleteHomestay = async (id: getHomepageRoom[]) => {
+  const handleDeleteHomestay = async (id: getHomepageRoom) => {
     axios
       .delete(` https://group5.altapro.online/rooms/${id}`, {
         headers: {
