@@ -120,7 +120,7 @@ const UploadNew = () => {
     <Layout>
       <div className="grid-cols-3 flex justify-between items-center">
         <div className="text-center w-full">
-          <Link to="/">
+          <Link to="/listHomestay">
             <Button
               id="btn-back"
               label="Kembali"

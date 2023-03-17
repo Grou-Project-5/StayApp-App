@@ -200,7 +200,7 @@ export default function DetailHomestay() {
                     </p>
                     <div className="modal-action">
                       <label htmlFor="my-modal-5" className="btn">
-                        Yay!
+                        Close
                       </label>
                     </div>
                   </div>
