@@ -10,8 +10,6 @@ import location from "assets/location.webp";
 import Button from "components/Button";
 import { getFeedback } from "utils/Datatypes";
 import { handleAuth } from "utils/redux/reducer";
-import Swal from "utils/Swal";
-import withReactContent from "sweetalert2-react-content";
 
 const background = {
     backgroundImage: `url(${imgHeader})`,
@@ -23,7 +21,6 @@ const background = {
 
 const UlasanRating = () => {
     const navigate = useNavigate();
-    const MySwal = withReactContent(Swal);
     const dispatch = useDispatch();
     const [, setCookie] = useCookies(["token"]);
     const [cookies, removeCookies] = useCookies(["token"]);
@@ -57,12 +54,6 @@ const UlasanRating = () => {
                 setCookie("token", res.data.token, { path: "/" });
         
                 dispatch(handleAuth(true));
-        
-                MySwal.fire({
-                  title: "Terimakasih Ulasannya",
-                  text: message,
-                  showCancelButton: false,
-                });
         
                 navigate("/");
               })

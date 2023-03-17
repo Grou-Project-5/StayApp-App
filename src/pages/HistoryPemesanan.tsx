@@ -1,8 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
 
 import Layout from "components/Layout";
+import { getHistory } from "utils/Datatypes";
 
 const History = () => {
+    const [loading, setLoading] = useState<boolean>(false);
+    const [dataRiwayat, setDataRiwayat] = useState<getHistory[]>([]);
+
+    const fetchDataHistory = () =>{
+        axios
+            .get(" https://group5.altapro.online/history")
+            .then((res) =>{
+                const {data} = res.data;
+                setDataRiwayat(data);
+            })
+            .catch((err) =>{
+                console.log(err);
+            })
+            .finally(() => setLoading(false));
+    };
+
+    useEffect(() =>{
+        fetchDataHistory();
+    }, []);
+    
     return(
         <Layout>
         <h1 className="text-right font-poppins text-black font-extrabold text-4xl flex justify-center pl-5 pr-5 mr-5 ml-5 mt-10 overflow-x-auto">History Pemesanan</h1>
