@@ -15,6 +15,7 @@ const Homepage = () => {
   const navigate = useNavigate();
 
   const fetchDataRoom = () => {
+    setLoading(true);
     axios
       .get("https://group5.altapro.online/rooms")
       .then((res) => {
@@ -33,44 +34,50 @@ const Homepage = () => {
 
   return (
     <>
-      <Layout>
-        <Header />
-        <div className="w-full min-h-screen flex flex-row justify-center pl-6 mt-10 overflow-hidden">
-          <div className="lg:grid lg:grid-cols-3 grid-cols-1 gap-2 overflow-hidden">
-            {dataRoom?.map((item) => {
-              return (
-                <>
-                  <div>
-                    <Card
-                      key={item.id}
-                      image={item.pictures}
-                      place={item.name}
-                      avail="Available"
-                      price={item.price}
-                    />
-                    <Button
-                      id="btn-edit"
-                      label="Detail Penginapan"
-                      className="btn ml-7 bg-bg-button border-none hover:bg-red-500 text-white"
-                      onClick={() => navigate(`/detailHomestay/${item.id}`)}
-                    />
-                  </div>
-                </>
-              );
-            })}
-          </div>
-        </div>
-        <div className="text-center w-full">
-          <Button
-            id="btn-loadMore"
-            label="Load More"
-            className="bg-bg-button w-10/12 lg:w-3/12 mt-10 rounded-lg py-4 text-white font-poppins font-semibold hover:bg-red-600 text-xl"
-          />
-        </div>
-        <h1 className="text-slate-500 font-bold text-center mt-10 pb-10 text-xl">
-          Copyright @2023 StayApp
-        </h1>
-      </Layout>
+      {loading ? (
+        <p>Please Wait...</p>
+      ) : (
+        <>
+          <Layout>
+            <Header />
+            <div className="w-full min-h-screen flex flex-row justify-center pl-6 mt-10 overflow-hidden">
+              <div className="lg:grid lg:grid-cols-3 grid-cols-1 gap-2 overflow-hidden">
+                {dataRoom?.map((item) => {
+                  return (
+                    <>
+                      <div>
+                        <Card
+                          key={item.id}
+                          image={item.pictures}
+                          place={item.name}
+                          avail="Available"
+                          price={item.price}
+                        />
+                        <Button
+                          id="btn-edit"
+                          label="Detail Penginapan"
+                          className="btn ml-7 bg-bg-button border-none hover:bg-red-500 text-white"
+                          onClick={() => navigate(`/detailHomestay/${item.id}`)}
+                        />
+                      </div>
+                    </>
+                  );
+                })}
+              </div>
+            </div>
+            <div className="text-center w-full">
+              <Button
+                id="btn-loadMore"
+                label="Load More"
+                className="bg-bg-button w-10/12 lg:w-3/12 mt-10 rounded-lg py-4 text-white font-poppins font-semibold hover:bg-red-600 text-xl"
+              />
+            </div>
+            <h1 className="text-slate-500 font-bold text-center mt-10 pb-10 text-xl">
+              Copyright @2023 StayApp
+            </h1>
+          </Layout>
+        </>
+      )}
     </>
   );
 };

@@ -119,7 +119,7 @@ const Navbar = () => {
                       <a
                         className="justify-between"
                         onClick={() => {
-                          navigate(`/profile/${profile.id}`);
+                          navigate(`/profile/${profile.name}`);
                         }}
                       >
                         Profile
