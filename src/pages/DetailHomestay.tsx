@@ -1,11 +1,16 @@
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
+import axios from "axios";
+
 import Layout from "components/Layout";
+//import CardUlasan from "components/CardUlasan";
 import imgDetail from "assets/prateek-gupta-aL_z92TK3SA-unsplash.jpg";
 import location from "assets/location.webp";
 import Input from "components/Input";
 import Button from "components/Button";
-
 import avatar from "assets/avatar.webp";
-import { useNavigate } from "react-router";
+import { getFeedback } from "utils/Datatypes";
+
 
 const background = {
   width: "80%",
@@ -17,6 +22,26 @@ const background = {
 
 export default function DetailHomestay() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [dataUlasan, setDataUlasan] = useState<getFeedback[]>([]);
+
+  const fetchDataUlasan = () => {
+    axios
+      .get("https://group5.altapro.online/rooms/1/feedbacks")
+      .then((res) => {
+        const { data } = res.data;
+        setDataUlasan(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    fetchDataUlasan();
+  }, []);
+
   return (
     <>
       <Layout>
@@ -134,10 +159,9 @@ export default function DetailHomestay() {
                 <h1 className="text-black text-2xl font-bold font-poppins mt-5">
                   Ulasan (4 Orang)
                 </h1>
-                <CardUlasan />
-                <CardUlasan />
-                <CardUlasan />
-                <CardUlasan />
+                {/* {dataUlasan?.map((ulasan) =>{
+                  <CardUlasan cardulasan={ulasan} />
+                })} */}
                 <div className="flex w-full justify-center">
                   <Button
                     id="loadMore"

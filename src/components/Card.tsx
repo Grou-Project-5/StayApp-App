@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { useNavigate } from "react-router";
-import imgComponent from "../assets/header.webp";
+import imgComponent from "/assets/header.webp";
 import Button from "./Button";
 
 interface PropsCard {
