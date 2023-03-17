@@ -54,11 +54,11 @@ const App = () => {
       element: <KonfirmasiPemesanan />,
     },
     {
-      path: "/profile",
+      path: "/profile/:id",
       element: <Profile />,
     },
     {
-      path: "/editProfile",
+      path: "/editProfile/:id",
       element: <EditProfile />,
     },
     {
@@ -78,7 +78,7 @@ const App = () => {
       element: <UploadNew />,
     },
     {
-      path: "/editUpdate",
+      path: "/editUpdate/:id",
       element: <EditUpdate />,
     },
     {

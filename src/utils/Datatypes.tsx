@@ -6,6 +6,7 @@ export interface getHomepageRoom {
   price?: string;
   description?: string;
   location?: string;
+  availability?: string;
 }
 
 export interface getProfile {
@@ -26,7 +27,7 @@ export interface EditProfileUser {
   pictures?: any;
 }
 
-export interface Submit {
+export interface getDataHomestay {
   id?: number;
   pictures?: any;
   name?: string;
@@ -35,6 +36,7 @@ export interface Submit {
   description?: string;
   max_visitors?: number;
   special_access?: string;
+  availability?: string;
   bedroom?: string;
   room_total?: number;
   kitchen?: string;
