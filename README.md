@@ -37,6 +37,8 @@ StayApp is a Application to Book Homestay
  - Sign in <br>
  - Sign Out <br>
  - Deactivate Account <br>
+ - User can hosted and rent Homestay
+ - User can buy and check avail before book
  
  # :computer: Not Logged - in User
  
@@ -56,7 +58,7 @@ StayApp is a Application to Book Homestay
 
  - User able to Delete a Homestay
  
- - User able to View your own Product 
+ - User able to View your own Product
 
 
 
