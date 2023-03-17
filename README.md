@@ -1,7 +1,7 @@
 # StayApp-App
 
 <p align="center">
-  <img width="460" height="460" src="(https://user-images.githubusercontent.com/102293238/225805776-bec8dc19-8260-4f8c-a016-3e6c0e28633e.jpg">
+  <img width="460" height="460" src=("https://user-images.githubusercontent.com/102293238/225805776-bec8dc19-8260-4f8c-a016-3e6c0e28633e.jpg">
 </p>
 <p align="center">
 StayApp is a Applicatio to Book Villa 
@@ -84,7 +84,7 @@ Here is a working live demo -
 <br />
 # 🎨 Prototype
 Here is the link for the UI design : https://www.figma.com/file/8BzfUvVkm3DH528bw8DcV1/Group-Team-5?node-id=45-148&t=mp4tfeqZxUNSuvyv-0
-<img src="https://user-images.githubusercontent.com/102293238/214952492-ded0125b-a459-4810-a740-27cd6908e041.png">
+
 
 # Deploy Website
 Here is the link for Website Deployment : https://stay-app.vercel.app/
