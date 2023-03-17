@@ -44,7 +44,7 @@ const App = () => {
     },
     {
       path: "/detailHomestay/:id",
-      element: checkToken ? <DetailHomestay /> : <Navigate to="/" />,
+      element: <DetailHomestay />,
     },
     {
       path: "/detailPesanan",
