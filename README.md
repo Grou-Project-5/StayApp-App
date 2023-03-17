@@ -1,8 +1,7 @@
-
 # StayApp-App
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/102293238/225806509-9983390a-caeb-4c31-83e8-82b6306aca54.jpg" />
+  <img src="https://user-images.githubusercontent.com/102293238/225806690-3e5c4011-85a5-413a-8cad-8ee53814b961.png" />
 </p>
 <p align="center">
 StayApp is a Applicatio to Book Villa 
