@@ -11,14 +11,6 @@ import Button from "components/Button";
 import { getFeedback } from "utils/Datatypes";
 import { handleAuth } from "utils/redux/reducer";
 
-const background = {
-  backgroundImage: `url(${imgHeader})`,
-  width: "80%",
-  height: "25rem",
-  backgroundSize: "cover",
-  backgroundRepeat: "no-repeat",
-};
-
 const UlasanRating = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -58,7 +50,7 @@ const UlasanRating = () => {
           navigate("/");
         })
         .catch((err) => {
-          console.log(err);
+          //console.log(err);
         })
         .finally(() => setLoading(false));
     };
@@ -80,7 +72,13 @@ const UlasanRating = () => {
             Contact Person: 0822XXXX
           </p>
         </div>
-        <div className=" rounded-2xl" style={background}></div>
+        <div className="flex justify-center pl-5 pr-5 mr-5 ml-5 mt-8 overflow-hidden">
+          <img
+            className="h-96 w-fit bg-no-repeat bg-center bg-auto rounded-xl"
+            src={imgHeader}
+            alt="img-header"
+          />
+        </div>
       </div>
 
       <div>
